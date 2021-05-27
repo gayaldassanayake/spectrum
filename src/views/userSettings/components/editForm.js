@@ -311,8 +311,6 @@ class UserWithData extends React.Component<Props, State> {
       username,
       description,
       website,
-      image,
-      coverPhoto,
       descriptionError,
       createError,
       nameError,
@@ -323,6 +321,13 @@ class UserWithData extends React.Component<Props, State> {
       emailError,
       didChangeEmail,
     } = this.state;
+
+    const image = this.state.image
+      ? this.state.image
+      : 'https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg';
+    const coverPhoto = this.state.coverPhoto
+      ? this.state.coverPhoto
+      : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQorZkmoc2-w9llNyHecEHBGPrh6iTbB_oaaQ&usqp=CAU'; //"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLOSMoTyueYaJt-N7RIVkp8kTUUGVqwBhqoQ&usqp=CAU";
 
     const postAuthRedirectPath = `${CLIENT_URL}/users/${username}/settings`;
 
