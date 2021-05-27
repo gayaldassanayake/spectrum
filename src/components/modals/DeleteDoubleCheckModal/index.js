@@ -16,6 +16,8 @@ import deleteMessage from 'shared/graphql/mutations/message/deleteMessage';
 import type { DeleteMessageType } from 'shared/graphql/mutations/message/deleteMessage';
 import archiveChannel from 'shared/graphql/mutations/channel/archiveChannel';
 import removeCommunityMember from 'shared/graphql/mutations/communityMember/removeCommunityMember';
+import deleteCurrentUser from 'shared/graphql/mutations/user/deleteCurrentUser';
+import { SERVER_URL } from 'src/api/constants';
 
 import ModalContainer from '../modalContainer';
 import { TextButton, WarnButton } from 'src/components/button';
@@ -57,6 +59,7 @@ type Props = {
   deleteChannel: Function,
   archiveChannel: Function,
   removeCommunityMember: Function,
+  deleteCurrentUser: Function,
   dispatch: Dispatch<Object>,
   isOpen: boolean,
   history: History,
@@ -237,6 +240,24 @@ class DeleteDoubleCheckModal extends React.Component<Props, State> {
             });
           });
       }
+      case 'delete-account': {
+        return this.props
+          .deleteCurrentUser()
+          .then(() => {
+            dispatch(addToastWithTimeout('success', 'Account deleted'));
+            this.setState({
+              isLoading: false,
+            });
+            return this.close();
+          })
+          .then(() => (window.location.href = `${SERVER_URL}/auth/logout`))
+          .catch(err => {
+            dispatch(addToastWithTimeout('error', err.message));
+            this.setState({
+              isLoading: false,
+            });
+          });
+      }
       default: {
         this.setState({
           isLoading: false,
@@ -300,6 +321,7 @@ const DeleteDoubleCheckModalWithMutations = compose(
   deleteMessage,
   archiveChannel,
   removeCommunityMember,
+  deleteCurrentUser,
   withRouter
 )(DeleteDoubleCheckModal);
 

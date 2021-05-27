@@ -25,6 +25,7 @@ import { SERVER_URL } from 'src/api/constants';
 import { Link } from 'react-router-dom';
 import { Loading } from 'src/components/loading';
 import type { Dispatch } from 'redux';
+import { openModal } from 'src/actions/modals';
 
 type State = {
   isLoading: boolean,
@@ -61,9 +62,9 @@ class DeleteAccountForm extends React.Component<Props, State> {
     }
   }
 
-  initDelete = () => {
-    this.setState({ deleteInited: true });
-  };
+  // initDelete = () => {
+  //   this.setState({ deleteInited: true });
+  // };
 
   cancelDelete = () => this.setState({ deleteInited: false });
 
@@ -87,7 +88,18 @@ class DeleteAccountForm extends React.Component<Props, State> {
     const { isLoading, ownsCommunities, deleteInited } = this.state;
     const {
       data: { user },
+      dispatch,
     } = this.props;
+
+    const initDelete = () =>
+      dispatch(
+        openModal('DELETE_DOUBLE_CHECK_MODAL', {
+          id: 'community.id',
+          entity: 'delete-account',
+          message: 'Are you sure you want to delete this account?',
+          buttonLabel: 'Delete My Account',
+        })
+      );
 
     if (user) {
       return (
@@ -136,7 +148,8 @@ class DeleteAccountForm extends React.Component<Props, State> {
               <HoverWarnOutlineButton
                 data-cy="delete-account-init-button"
                 color={'warn.default'}
-                onClick={this.initDelete}
+                // onClick={this.initDelete}
+                onClick={initDelete}
               >
                 Delete my account
               </HoverWarnOutlineButton>
