@@ -117,7 +117,7 @@ export const CoverInput = (props: CoverPhotoInputProps) => {
       <InputOverlay
         visible={!props.defaultValue || props.defaultValue.length === 1}
       >
-        <WhiteOutlineButton as={'div'}>Add Cover Photo</WhiteOutlineButton>
+        <WhiteOutlineButton as={'div'}>Update Cover Photo</WhiteOutlineButton>
       </InputOverlay>
       <CoverImage
         src={props.defaultValue ? `${props.defaultValue}` : ''}
