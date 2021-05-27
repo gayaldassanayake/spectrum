@@ -143,12 +143,13 @@ export const StyledWhiteButton = styled(StyledButton)`
 
 export const StyledOutlineButton = styled(StyledButton)`
   background: transparent;
-  border: 1px solid ${theme.bg.border};
+  border: 1px solid ${theme.text.default};
   transition: box-shadow 0.2s ease-in-out;
 
   &:hover {
     background: transparent;
-    border: 1px solid ${tint(theme.bg.border, -8)};
+    box-shadow: 0 0 0 2px ${theme.bg.default}, 0 0 0 4px ${theme.bg.border};
+    border: 1px solid ${tint(theme.text.default, -8)};
   }
 
   &:focus {
@@ -214,6 +215,7 @@ export const StyledWhiteOutlineButton = styled(StyledOutlineButton)`
 `;
 
 export const StyledHoverWarnOutlineButton = styled(StyledOutlineButton)`
+  border: 1px solid ${theme.text.default};
   &:hover {
     background: ${theme.warn.default};
     border: 1px solid ${theme.warn.default};
