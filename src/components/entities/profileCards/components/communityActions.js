@@ -3,7 +3,11 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { CommunityInfoType } from 'shared/graphql/fragments/community/communityInfo';
-import { PrimaryButton, OutlineButton } from 'src/components/button';
+import {
+  HoverWarnOutlineButton,
+  PrimaryButton,
+  OutlineButton,
+} from 'src/components/button';
 import { openModal } from 'src/actions/modals';
 import JoinCommunity from 'src/components/joinCommunityWrapper';
 import { ActionsRowContainer } from '../style';
@@ -43,14 +47,14 @@ export const UnconnectedCommunityActions = (props: Props) => {
         )}
 
         {!isOwner && (
-          <OutlineButton
+          <HoverWarnOutlineButton
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onClick={leaveCommunity}
             data-cy="leave-community-button"
           >
-            {isHovering ? 'Leave community' : 'Member'}
-          </OutlineButton>
+            Leave community
+          </HoverWarnOutlineButton>
         )}
       </ActionsRowContainer>
     );

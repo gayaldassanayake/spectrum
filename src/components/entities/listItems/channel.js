@@ -9,7 +9,11 @@ import Icon from 'src/components/icon';
 import JoinChannelWrapper from 'src/components/joinChannelWrapper';
 import LeaveChannelWrapper from 'src/components/leaveChannelWrapper';
 import ToggleChannelNotifications from 'src/components/toggleChannelNotifications';
-import { OutlineButton, PrimaryOutlineButton } from 'src/components/button';
+import {
+  OutlineButton,
+  PrimaryOutlineButton,
+  HoverWarnOutlineButton,
+} from 'src/components/button';
 import Tooltip from 'src/components/tooltip';
 import {
   ChannelRow,
@@ -101,10 +105,10 @@ const Channel = (props: Props) => {
       return (
         <LeaveChannelWrapper
           channel={channel}
-          render={({ isLoading, isHovering }) => (
-            <OutlineButton size={'small'} style={{ width: '100px' }}>
-              {isLoading ? 'Leaving...' : isHovering ? 'Leave' : 'Member'}
-            </OutlineButton>
+          render={({ isLoading }) => (
+            <HoverWarnOutlineButton size={'small'} style={{ width: '100px' }}>
+              {isLoading ? 'Leaving...' : 'Leave'}
+            </HoverWarnOutlineButton>
           )}
         />
       );
