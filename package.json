@@ -2,6 +2,7 @@
   "name": "Spectrum",
   "version": "3.1.15",
   "license": "BSD-3-Clause",
+  "homepage": "http://gayaldassanayake.github.io/spectrum",
   "devDependencies": {
     "@babel/preset-flow": "^7.0.0",
     "babel-cli": "^6.24.1",
@@ -35,6 +36,7 @@
     "eslint-plugin-react": "^7.12.4",
     "flow-bin": "0.66",
     "forever": "^0.15.3",
+    "gh-pages": "^3.2.0",
     "is-html": "^1.1.0",
     "lint-staged": "^3.3.0",
     "micromatch": "^3.0.4",
@@ -285,8 +287,9 @@
     "process:emails:test": "(cd email-template-scripts && python3 inline-html-emails.py && node sendgrid-sync.js)",
     "process:emails:prod": "(cd email-template-scripts && python3 inline-html-emails.py && node sendgrid-sync.js prod)",
     "process:emails:send": "(cd email-template-scripts && node send-test-emails.js brian@spectrum.chat)",
-    "deploy": "node scripts/deploy",
-    "heroku": "node scripts/heroku-deploy"
+    "heroku": "node scripts/heroku-deploy",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "lint-staged": {
     "*.js": [
